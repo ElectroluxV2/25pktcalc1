@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kalkulator punktacji – Asystent Zdrowego Stylu Życia (C++)</title>
+    <style>
+        :root { color-scheme: light dark; }
+
+        html, body {
+            height: 100vh;
+            margin: 0;
+            background-color: light-dark(#f8f9fa, #121212);
+            color: light-dark(#222, #eee);
+            font-family: 'Segoe UI', sans-serif;
+            display: flex;
+            flex-direction: column;
+        }
+
+        h1 {
+            text-align: center;
+            color: light-dark(#1a5276, #5dade2);
+            font-size: 1.5em;
+            margin: 10px 0 12px;
+        }
+
+        main {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px 20px;
+            box-sizing: border-box;
+            gap: 20px;
+        }
+
+        /* LEWA STRONA */
+        .table-wrapper {
+            flex: 3;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: light-dark(#fff, #1a1a1a);
+            font-size: 0.9em;
+            border-radius: 6px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        th, td {
+            border: 1px solid light-dark(#ccc, #333);
+            padding: 5px 7px;
+            vertical-align: top;
+        }
+
+        th {
+            background-color: light-dark(#e9ecef, #252525);
+        }
+
+        td:first-child {
+            width: 34%;
+            font-weight: bold;
+        }
+
+        label {
+            display: block;
+            margin: 2px 0;
+            line-height: 1.25em;
+        }
+
+        input[type="checkbox"] {
+            transform: scale(0.9);
+            margin-right: 6px;
+        }
+
+        /* PRAWA STRONA */
+        .side-panel {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 14px;
+        }
+
+        .penalty-section,
+        .summary {
+            border-radius: 6px;
+            padding: 10px 12px;
+        }
+
+        .penalty-section {
+            background-color: light-dark(#fdecea, #2e1511);
+            border-left: 5px solid light-dark(#c0392b, #e74c3c);
+            font-size: 0.9em;
+        }
+
+        .penalty-section h3 {
+            margin: 0 0 4px 0;
+            color: light-dark(#922b21, #e57373);
+            font-size: 0.95em;
+            text-align: center;
+        }
+
+        .penalty-section label {
+            display: block;
+            margin: 3px 0;
+        }
+
+        .summary {
+            background-color: light-dark(#f1f8f5, #14281d);
+            border-left: 5px solid light-dark(#2e7d32, #1abc9c);
+            text-align: center;
+            font-size: 0.95em;
+        }
+
+        .total {
+            font-weight: bold;
+            color: light-dark(#145a32, #58d68d);
+            margin-bottom: 8px;
+        }
+
+        .buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        button {
+            background-color: light-dark(#1a5276, #16a085);
+            color: light-dark(#fff, #000);
+            border: none;
+            border-radius: 4px;
+            padding: 6px 10px;
+            cursor: pointer;
+            font-size: 0.9em;
+        }
+
+        button:hover {
+            background-color: light-dark(#154360, #149174);
+        }
+    </style>
+</head>
+
+<body>
+<h1>Kalkulator punktacji – C++ Asystent Zdrowego Stylu Życia</h1>
+
+<main>
+    <!-- LEWA STRONA -->
+    <div class="table-wrapper">
+        <table id="pointsTable">
+            <tr><th>Kategoria</th><th>Wymagania (każdy = 1 pkt)</th></tr>
+
+            <tr>
+                <td>1. Walidacja danych i menu – 6 pkt</td>
+                <td>
+                    <label><input type="checkbox" /> Walidacja danych (waga, wzrost, wiek, płeć)</label>
+                    <label><input type="checkbox" /> Użycie pętli do‑while</label>
+                    <label><input type="checkbox" /> Menu celu (switch)</label>
+                    <label><input type="checkbox" /> Menu aktywności (switch)</label>
+                    <label><input type="checkbox" /> Zakresy wartości poprawne</label>
+                    <label><input type="checkbox" /> Wyświetlanie opcji menu</label>
+                </td>
+            </tr>
+
+            <tr>
+                <td>2. Obliczenia podstawowe – 5 pkt</td>
+                <td>
+                    <label><input type="checkbox" /> BMI + interpretacja</label>
+                    <label><input type="checkbox" /> BMR (Podstawowa Przemiana Materii)</label>
+                    <label><input type="checkbox" /> TDEE (Całkowite Dzienne Zapotrzebowanie Energetyczne)</label>
+                    <label><input type="checkbox" /> Cel kaloryczny ±500 / +300</label>
+                    <label><input type="checkbox" /> Idealna waga BMI = 22 (pow())</label>
+                </td>
+            </tr>
+
+            <tr>
+                <td>3. Symulacja postępów – 10 pkt</td>
+                <td>
+                    <label><input type="checkbox" /> Pętla while (!cel && tydzień&lt;52)</label>
+                    <label><input type="checkbox" /> Break – osiągnięcie celu ±2 kg / BMI poza 16‑35</label>
+                    <label><input type="checkbox" /> Zmiana wagi (deficyt / 7700)</label>
+                    <label><input type="checkbox" /> Fluktuacje (sin())</label>
+                    <label><input type="checkbox" /> Aktualizacja wagi</label>
+                    <label><input type="checkbox" /> Motywacja (exp()), efektywność</label>
+                    <label><input type="checkbox" /> Urlop co 8 tyg. (continue)</label>
+                    <label><input type="checkbox" /> Podsumowanie co 4 tyg. (for)</label>
+                    <label><input type="checkbox" /> Średnia zmiana z 4 tyg.</label>
+                    <label><input type="checkbox" /> Wyświetlanie tygodniowych wyników</label>
+                </td>
+            </tr>
+
+            <tr>
+                <td>4. Analiza końcowa – 4 pkt</td>
+                <td>
+                    <label><input type="checkbox" /> Całkowita zmiana wagi i średnia tyg.</label>
+                    <label><input type="checkbox" /> BMI końcowe i interpretacja</label>
+                    <label><input type="checkbox" /> Szacowanie czasu do idealnej wagi</label>
+                    <label><input type="checkbox" /> Spalone kalorie łącznie</label>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- PRAWA STRONA -->
+    <div class="side-panel">
+        <div class="penalty-section">
+            <h3>Punkty ujemne (max −2)</h3>
+            <label><input type="checkbox" class="penalty" /> Kod nieczytelny / chaotyczny (−1)</label>
+            <label><input type="checkbox" class="penalty" /> Brak komentarzy / nieumiejętność wyjaśnienia (−1)</label>
+        </div>
+
+        <div class="summary">
+            <p class="total" id="totalScore">Suma punktów: 0 / 25</p>
+            <div class="buttons">
+                <button id="copyHtml">📋 Kopiuj raport (Teams)</button>
+                <button id="resetForm">🔄 Resetuj formularz</button>
+            </div>
+        </div>
+    </div>
+</main>
+
+<script>
+    const allBoxes = document.querySelectorAll("input[type='checkbox']");
+    const scoreEl = document.getElementById("totalScore");
+    const resetBtn = document.getElementById("resetForm");
+
+    function updateLiveScore() {
+        const positives = document.querySelectorAll("input[type='checkbox']:not(.penalty)");
+        const penalties = document.querySelectorAll(".penalty");
+        let total = 0, minus = 0;
+        positives.forEach(c => total += c.checked ? 1 : 0);
+        penalties.forEach(p => minus += p.checked ? 1 : 0);
+        const final = Math.max(total - minus, 0);
+        scoreEl.innerText = `Suma punktów: ${final} / 25 (−${minus} pkt)`;
+        unsavedChanges = true;
+    }
+
+    allBoxes.forEach(cb => cb.addEventListener("change", updateLiveScore));
+
+    document.getElementById("copyHtml").addEventListener("click", () => {
+        const rows = document.querySelectorAll("#pointsTable tr:not(:first-child)");
+        let output = "=== Wynik oceny – Asystent Zdrowego Stylu Życia (C++) ===\n\n";
+
+        rows.forEach(row => {
+            const category = row.cells[0].innerText.trim();
+            output += `**${category}**\n`;
+            const checks = row.querySelectorAll("label");
+            checks.forEach(lbl => {
+                const cb = lbl.querySelector("input[type='checkbox']");
+                const mark = cb && cb.checked ? "✔" : "✖";
+                output += `${mark} ${lbl.textContent.trim().replace(/^[✔✖]\s*/, "")}\n`;
+            });
+            output += "\n";
+        });
+
+        const penalties = document.querySelectorAll(".penalty");
+        let minus = 0;
+        penalties.forEach(p => minus += p.checked ? 1 : 0);
+        if (minus > 0) {
+            output += "**Punkty ujemne:**\n";
+            penalties.forEach(p => {
+                if (p.checked) output += `−1 ${p.parentElement.textContent.trim()}\n`;
+            });
+            output += "\n";
+        }
+        output += scoreEl.innerText;
+
+        navigator.clipboard.writeText(output)
+            .then(() => alert("✔ Raport skopiowany – wklej do Teams (Ctrl+V)."))
+            .catch(() => alert("❌ Nie udało się skopiować."));
+    });
+
+    // RESET FORMULARZA
+    resetBtn.addEventListener("click", () => {
+        if (confirm("Czy na pewno chcesz zresetować formularz?")) {
+            allBoxes.forEach(cb => (cb.checked = false));
+            updateLiveScore();
+            unsavedChanges = false;
+        }
+    });
+
+    // BLOKADA PRZED RELOADEM
+    let unsavedChanges = false;
+    window.addEventListener("beforeunload", (e) => {
+        if (unsavedChanges) {
+            e.preventDefault();
+            e.returnValue = "";
+        }
+    });
+
+    updateLiveScore();
+</script>
+</body>
+</html>
